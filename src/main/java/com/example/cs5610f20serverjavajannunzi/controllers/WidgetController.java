@@ -55,5 +55,13 @@ public class WidgetController {
             @RequestBody Widget newWidget) {
         return service.updateWidget(widgetId, newWidget);
     }
-    // TODO: updateWidget, deleteWidget
+
+//    @PutMapping("/api/widgets")
+//    public List<Widget> updateWidgetOrder(
+//            @RequestBody List<Widget> newWidgetOrder) {
+//        return service.updateWidgetOrder(newWidgetOrder);
+//    }
+
+
+
 }

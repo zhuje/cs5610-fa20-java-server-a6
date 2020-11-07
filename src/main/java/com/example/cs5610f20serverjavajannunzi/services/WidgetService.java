@@ -10,9 +10,18 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+// @Service -- marks this as a service (our local JAVA interface that talks
+// to the SQL database)
 @Service
 public class WidgetService {
 
+    // @Autowired allows the server to automatically
+    // instantiate 'WidgetRepository widgetRepository'
+    // allows this application to automatically log in
+    // to SQL schema with the given username and password in
+    // the configuration.
+    // This object 'widgetRepository' is what allows us to
+    // relay commands to the SQL database.
     @Autowired
     WidgetRepository widgetRepository;
 
@@ -46,15 +55,18 @@ public class WidgetService {
     public void deleteWidget(Integer wid) {
         widgetRepository.deleteById(wid);
     }
-    public Widget updateWidget(
-            Integer widgetId,
-            Widget newWidget) {
-        Optional widgetO = widgetRepository.findById(widgetId);
-        if(widgetO.isPresent()) {
-            Widget widget = (Widget) widgetO.get();
-            widget.setName(newWidget.getName());
-            widget.setType(newWidget.getType());
-            return widgetRepository.save(widget);
+
+
+    public Widget updateWidget(Integer widgetId, Widget newWidget) {
+
+        Optional widgetO = widgetRepository.findById(widgetId); // get widget from database by (widgetId)
+        if(widgetO.isPresent()) { // if the widgetId exists in our database
+            Widget widget = (Widget) widgetO.get(); // the the Widget underneath the 'Optional' Wrapper
+            widget.setName(newWidget.getName()); // update widget name
+            widget.setType(newWidget.getType()); // update widget type
+            widget.setSize(newWidget.getSize());
+            widget.setText(newWidget.getText());
+            return widgetRepository.save(widget); // return updated widget back to server with .save(widget)
         } else {
             return null;
         }
@@ -67,4 +79,15 @@ public class WidgetService {
 //        }
 //        return 0;
     }
+
+
+//    public List<Widget> updateWidgetOrder(List<Widget> newWidgetOrder){
+//        widgets = newWidgetOrder;
+//
+//        return widgets;
+//    }
+//
+//
+//
+
 }
