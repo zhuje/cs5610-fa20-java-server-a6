@@ -66,6 +66,7 @@ public class WidgetService {
             widget.setType(newWidget.getType()); // update widget type
             widget.setSize(newWidget.getSize());
             widget.setText(newWidget.getText());
+            widget.setSrc(newWidget.getSrc());
             return widgetRepository.save(widget); // return updated widget back to server with .save(widget)
         } else {
             return null;
