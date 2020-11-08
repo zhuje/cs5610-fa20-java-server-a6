@@ -84,17 +84,21 @@ public class WidgetService {
 
 
     public List<Widget> updateWidgetOrder(List<Widget> newWidgetOrder,String topicId){
-        List<Widget> deleteWidgets = widgetRepository.findWidgetsForTopic(topicId);
 
+        // delete widgets from the 'newWidgetOrder' by deleting
+        // all widgets by given 'topicId'
+        List<Widget> deleteWidgets = widgetRepository.findWidgetsForTopic(topicId);
         for (Widget w : deleteWidgets) {
             widgetRepository.delete(w);
         }
 
+        // replace with 'newWidgetOrder'
         for (Widget w : newWidgetOrder) {
             widgetRepository.save(w);
-
         }
 
+        // return the widgets from the given topic to be
+        // re-rendered in client (already contains new order of widgets)
         return findWidgetsForTopic(topicId);
     }
 
