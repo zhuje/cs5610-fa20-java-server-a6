@@ -57,10 +57,12 @@ public class WidgetController {
     }
 
 //    @PutMapping("/api/widgets")
-//    public List<Widget> updateWidgetOrder(
-//            @RequestBody List<Widget> newWidgetOrder) {
-//        return service.updateWidgetOrder(newWidgetOrder);
-//    }
+    @PutMapping("/api/topics/{topicId}/widgets")
+    public List<Widget> updateWidgetOrder(
+            @PathVariable("topicId") String topicId,
+            @RequestBody List<Widget> newWidgetOrder) {
+        return service.updateWidgetOrder(newWidgetOrder, topicId);
+    }
 
 
 

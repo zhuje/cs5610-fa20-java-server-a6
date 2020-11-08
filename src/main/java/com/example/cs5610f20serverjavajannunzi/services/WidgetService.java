@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,13 +83,27 @@ public class WidgetService {
     }
 
 
-//    public List<Widget> updateWidgetOrder(List<Widget> newWidgetOrder){
-//        widgets = newWidgetOrder;
-//
-//        return widgets;
-//    }
-//
-//
-//
+    public List<Widget> updateWidgetOrder(List<Widget> newWidgetOrder,String topicId){
+        List<Widget> deleteWidgets = widgetRepository.findWidgetsForTopic(topicId);
+
+        for (Widget w : deleteWidgets) {
+            widgetRepository.delete(w);
+        }
+
+        for (Widget w : newWidgetOrder) {
+            widgetRepository.save(w);
+
+        }
+
+        return findWidgetsForTopic(topicId);
+    }
+
+
+
+
+
+
+
+
 
 }
