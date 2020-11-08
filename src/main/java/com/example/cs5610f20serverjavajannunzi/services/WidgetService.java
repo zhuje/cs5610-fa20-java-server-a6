@@ -68,6 +68,7 @@ public class WidgetService {
             widget.setSize(newWidget.getSize());
             widget.setText(newWidget.getText());
             widget.setSrc(newWidget.getSrc());
+            widget.setValue(newWidget.getValue()); // for list value is type of list (ordered vs. unordered)
             return widgetRepository.save(widget); // return updated widget back to server with .save(widget)
         } else {
             return null;
